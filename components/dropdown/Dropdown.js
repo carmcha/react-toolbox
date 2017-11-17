@@ -25,7 +25,7 @@ const factory = (Input) => {
       auto: PropTypes.bool,
       className: PropTypes.string,
       disabled: PropTypes.bool,
-      error: PropTypes.string,
+      error: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
       label: PropTypes.string,
       labelKey: PropTypes.string,
       name: PropTypes.string,
@@ -154,6 +154,9 @@ const factory = (Input) => {
     };
 
     handleKeyDown = (event) => {
+      if (event) {
+        event.persist()
+      }
       const { source, valueKey } = this.props;
       const { focusedItemIndex } = this.state;
       const lastItemIndex = source.length - 1;
@@ -253,6 +256,9 @@ const factory = (Input) => {
     };
 
     handleBlur = (event) => {
+      if (event) {
+        event.persist()
+      }
       event.stopPropagation();
 
       const me = this;
